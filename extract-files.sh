@@ -8,7 +8,7 @@
 
 set -e
 
-DEVICE=TANK3
+DEVICE=mssi_g91v95c2k_dfl_eea
 VENDOR=oblue
 
 # Load extract_utils and do some sanity checks
