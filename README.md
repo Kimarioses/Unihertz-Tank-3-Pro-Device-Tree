@@ -1,8 +1,9 @@
-# Android device tree for OBLUE TANK 3 (mssi_g91v95c2k_dfl_eea)
+# Android device tree for 8849 TANK 3 (TANK3)
 
 ```
 #
-# Copyright (C) 2024 The LineageOS Project
+# Copyright (C) 2026 The Android Open Source Project
+# Copyright (C) 2026 SebaUbuntu's TWRP device tree generator
 #
 # SPDX-License-Identifier: Apache-2.0
 #

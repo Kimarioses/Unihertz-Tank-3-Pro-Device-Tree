@@ -5,8 +5,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-LOCAL_PATH := $(call my-dir)
-
-ifeq ($(TARGET_DEVICE),TANK3)
-include $(call all-subdir-makefiles,$(LOCAL_PATH))
-endif
+add_lunch_combo omni_TANK3-user
+add_lunch_combo omni_TANK3-userdebug
+add_lunch_combo omni_TANK3-eng

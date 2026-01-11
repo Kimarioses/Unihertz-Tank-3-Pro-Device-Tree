@@ -1,13 +1,14 @@
 #
-# Copyright (C) 2024 The LineageOS Project
+# Copyright (C) 2026 The Android Open Source Project
+# Copyright (C) 2026 SebaUbuntu's TWRP device tree generator
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_mssi_g91v95c2k_dfl_eea.mk
+    $(LOCAL_DIR)/omni_TANK3.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_mssi_g91v95c2k_dfl_eea-user \
-    lineage_mssi_g91v95c2k_dfl_eea-userdebug \
-    lineage_mssi_g91v95c2k_dfl_eea-eng
+    omni_TANK3-user \
+    omni_TANK3-userdebug \
+    omni_TANK3-eng
