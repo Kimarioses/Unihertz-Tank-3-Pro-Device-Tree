@@ -5,31 +5,106 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-LOCAL_PATH := device/oblue/TANK3
-# A/B
+LOCAL_PATH := device/oblue/tank3
+
+# Dynamic
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+# A/B partitions
+ENABLE_VIRTUAL_AB := true
+AB_OTA_UPDATER := true
+AB_OTA_PARTITIONS += \
+    dtbo \
+    system \
+    vendor \
+    product \
+    system_ext \
+    boot \
+    vendor \
+    vendor_boot \
+    vendor_dlkm \
+    vbmeta \
+    vbmeta_vendor \
+    vbmeta_system \
+
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
-    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=ext4 \
-    POSTINSTALL_OPTIONAL_system=true
+    POSTINSTALL_PATH_system=system/bin/mtk_plpath_utils \
+    FILESYSTEM_TYPE_system=erofs \
+    POSTINSTALL_OPTIONAL_system=true \
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service
+    bootctrl \
+    bootctrl.recovery \
+    android.hardware.boot@1.2-service \
+    android.hardware.boot@1.2-mtkimpl \
+    android.hardware.boot@1.2-mtkimpl.recovery \
+
+PRODUCT_PACKAGES_DEBUG += \
+    bootctrl \
+    update_engine_client
 
 PRODUCT_PACKAGES += \
-    bootctrl.mt6895
-
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.mt6895 \
+    bootctrl.mt6895.recovery
+
+PRODUCT_PACKAGES += \
     libgptutils \
     libz \
-    libcutils
+    libcutils \
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
     cppreopts.sh \
     update_engine \
     update_verifier \
-    update_engine_sideload
+    update_engine_sideload \
+    update_engine_client \
+
+# Health
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service \
+
+# Suspend service
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libSuspendProperties \
+    android.system.suspend@1.0 \
+    android.system.suspend-service \
+
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libSuspendProperties.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend@1.0.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend-V1-ndk.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend.control-V1-cpp.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend.control.internal-cpp.so
+RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/hw/android.system.suspend-service
+
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@4.0.vendor \
+    android.hardware.keymaster@4.1 \
+
+# Keymint
+PRODUCT_PACKAGES += \
+    android.hardware.security.keymint \
+    android.hardware.security.secureclock \
+    android.hardware.security.sharedsecret \
+
+# Remotely Key provisioner
+PRODUCT_PACKAGES += android.hardware.security.rkp-V3-ndk
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/android.hardware.security.rkp-V3-ndk.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/libcppcose_rkp.so
+
+# Keystore2
+PRODUCT_PACKAGES += \
+    android.system.keystore2 \
+
+# Gatekeeper
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0.vendor \
+    android.hardware.gatekeeper@1.0-impl \
+    android.hardware.gatekeeper@1.0-service \
+
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/android.hardware.gatekeeper-V1-ndk.so
+
