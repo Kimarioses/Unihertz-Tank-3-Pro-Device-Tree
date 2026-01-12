@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-LOCAL_PATH := device/oblue/tank3
+LOCAL_PATH := device/oblue/TANK3
 
 # Dynamic
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -107,4 +107,3 @@ PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service \
 
 RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/android.hardware.gatekeeper-V1-ndk.so
-
