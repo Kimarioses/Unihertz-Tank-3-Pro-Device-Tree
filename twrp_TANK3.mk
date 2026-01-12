@@ -1,31 +1,25 @@
-#
-# Copyright (C) 2026 The Android Open Source Project
-# Copyright (C) 2026 SebaUbuntu's TWRP device tree generator
+##
+# Copyright (C) 2023 The Android Open Source Project
+# Copyright (C) 2023 SebaUbuntu's TWRP device tree generator
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
 # Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 
-# Configure twrp config common.mk
+#Inherit emulated_storage properties
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
+# Inherit userspace reboot properties
+$(call inherit-product, $(SRC_TARGET_DIR)/product/userspace_reboot.mk)
+
+# Inherit some common Omni stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
-# Device specific configs
+# Inherit from TANK3 device
 $(call inherit-product, device/oblue/TANK3/device.mk)
-
-# Configure launch_with_vendor_ramdisk.mk
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
-
-# Configure compression
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
-
-# Configure virtual_ab_ota.mk
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
-
-# Configure emulated_storage.mk
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 PRODUCT_DEVICE := TANK3
 PRODUCT_NAME := twrp_TANK3
