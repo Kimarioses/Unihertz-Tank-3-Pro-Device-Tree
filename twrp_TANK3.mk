@@ -5,15 +5,29 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, device/oblue/TANK3/patches.mk ) 
 
-# Inherit some common Omni stuff.
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+
+# Configure twrp config common.mk
 $(call inherit-product, vendor/twrp/config/common.mk)
 
-# Inherit from TANK3 device
+# Device specific configs
 $(call inherit-product, device/oblue/TANK3/device.mk)
+
+# Configure launch_with_vendor_ramdisk.mk
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
+
+# Configure compression
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+
+# Configure virtual_ab_ota.mk
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+
+# Configure emulated_storage.mk
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 PRODUCT_DEVICE := TANK3
 PRODUCT_NAME := twrp_TANK3
@@ -22,8 +36,3 @@ PRODUCT_MODEL := TANK 3
 PRODUCT_MANUFACTURER := oblue
 
 PRODUCT_GMS_CLIENTID_BASE := android-agold
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="TANK3-user 12 SP1A.210812.016 V01.00.01 release-keys"
-
-BUILD_FINGERPRINT := 8849/TANK3/TANK3:12/SP1A.210812.016/V01.00.01:user/release-keys
