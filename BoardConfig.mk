@@ -94,13 +94,13 @@ BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_GROUPS := main
 BOARD_MAIN_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304 )
 BOARD_MAIN_PARTITION_LIST := \
-    system \
-    odm_dlkm \
-    product \
-    vendor_dlkm \
-    system_ext \
-    vendor \
-    system_dlkm \
+  system \
+  vendor \
+  product \
+  system_ext \
+  odm \
+  vendor_dlkm \
+  odm_dlkm
 
 # File System
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -121,6 +121,10 @@ TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
 TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
+TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
+TARGET_COPY_OUT_ODM := odm
+TARGET_COPY_OUT_SYSTEM := system
 
 # Recovery
 TARGET_NO_RECOVERY := true
