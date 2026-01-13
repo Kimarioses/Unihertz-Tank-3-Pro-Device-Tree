@@ -1,58 +1,42 @@
 #
-# Copyright (C) 2026 The Android Open Source Project
-# Copyright (C) 2026 SebaUbuntu's TWRP device tree generator
+# Copyright (C) 2023 The Android Open Source Project
+# Copyright (C) 2023 SebaUbuntu's TWRP device tree generator
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
 LOCAL_PATH := device/oblue/TANK3
 
-# Dynamic
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-# A/B partitions
+# Virtual A/B
 ENABLE_VIRTUAL_AB := true
-AB_OTA_UPDATER := true
-AB_OTA_PARTITIONS += \
-    dtbo \
-    system \
-    vendor \
-    product \
-    system_ext \
-    boot \
-    vendor \
-    vendor_boot \
-    vendor_dlkm \
-    vbmeta \
-    vbmeta_vendor \
-    vbmeta_system \
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
+# A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/mtk_plpath_utils \
     FILESYSTEM_TYPE_system=erofs \
-    POSTINSTALL_OPTIONAL_system=true \
+    POSTINSTALL_OPTIONAL_system=true
+
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_vendor=true \
+    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
+    FILESYSTEM_TYPE_vendor=erofs \
+    POSTINSTALL_OPTIONAL_vendor=true
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    bootctrl \
-    bootctrl.recovery \
     android.hardware.boot@1.2-service \
     android.hardware.boot@1.2-mtkimpl \
-    android.hardware.boot@1.2-mtkimpl.recovery \
+    android.hardware.boot@1.2-mtkimpl.recovery
 
 PRODUCT_PACKAGES_DEBUG += \
-    bootctrl \
+    bootctl \
     update_engine_client
 
 PRODUCT_PACKAGES += \
-    bootctrl.mt6895 \
-    bootctrl.mt6895.recovery
-
-PRODUCT_PACKAGES += \
-    libgptutils \
-    libz \
-    libcutils \
+    bootctrl.$(PRODUCT_PLATFORM) \
+    bootctrl.$(PRODUCT_PLATFORM).recovery
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -60,50 +44,36 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_verifier \
     update_engine_sideload \
-    update_engine_client \
+    checkpoint_gc
 
-# Health
+# API
+PRODUCT_SHIPPING_API_LEVEL := 35
+
+# Dynamic partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+# fastbootd
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
+    fastbootd
+
+# Health HAL
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
-    android.hardware.health@2.1-service \
+    android.hardware.health@2.1-service
 
-# Suspend service
+# VNDK
+PRODUCT_TARGET_VNDK_VERSION := curent
+
+# Additional Libraries
 TARGET_RECOVERY_DEVICE_MODULES += \
-    libSuspendProperties \
-    android.system.suspend@1.0 \
-    android.system.suspend-service \
+    libkeymaster4 \
+    libkeymaster41 \
+    libpuresoftkeymasterdevice \
+    libion
 
-RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libSuspendProperties.so
-RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend@1.0.so
-RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend-V1-ndk.so
-RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend.control-V1-cpp.so
-RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend.control.internal-cpp.so
-RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/hw/android.system.suspend-service
-
-# Keymaster
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0.vendor \
-    android.hardware.keymaster@4.1 \
-
-# Keymint
-PRODUCT_PACKAGES += \
-    android.hardware.security.keymint \
-    android.hardware.security.secureclock \
-    android.hardware.security.sharedsecret \
-
-# Remotely Key provisioner
-PRODUCT_PACKAGES += android.hardware.security.rkp-V3-ndk
-RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/android.hardware.security.rkp-V3-ndk.so
-RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/libcppcose_rkp.so
-
-# Keystore2
-PRODUCT_PACKAGES += \
-    android.system.keystore2 \
-
-# Gatekeeper
-PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0.vendor \
-    android.hardware.gatekeeper@1.0-impl \
-    android.hardware.gatekeeper@1.0-service \
-
-RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/android.hardware.gatekeeper-V1-ndk.so
+RECOVERY_LIBRARY_SOURCE_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster41.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
