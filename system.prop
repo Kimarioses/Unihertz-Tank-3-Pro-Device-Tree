@@ -10,20 +10,8 @@ ro.sys.usb.storage.type=mtp
 # Crypto
 ro.crypto.volume.filenames_mode=aes-256-cts
 
-# TEE
-ro.tee_support=1
-ro.tee.rkp_support=true
-ro.vendor.mtk_trustkernel_tee_support=1
-ro.hardware.gatekeeper=trustkernel
-ro.vendor.trustkernel.attest_ids=1
-
 # Keymaster
 keymaster_ver=4.1
-
-# A-gold
-ro.agui.platform_name=
-ro.agui.version_release=15
-ro.agui_tee=TRUSTKERNEL
 
 # Misc
 ro.vendor.mediatek.platform=MT6895
