@@ -7,37 +7,23 @@
 
 LOCAL_PATH := device/oblue/TANK3
 
-# Virtual A/B
 ENABLE_VIRTUAL_AB := true
- A/B
 AB_OTA_UPDATER := true
+
 AB_OTA_PARTITIONS += \
     boot \
-    cam_vpu1 \
-    cam_vpu2 \
-    cam_vpu3 \
-    dpm \
     dtbo \
-    gz \
     lk \
-    logo \
-    mcupm \
-    md1img \
-    pi_img \
-    preloader_raw \
+    odm \
+    odm_dlkm \
     product \
-    scp \
-    spmfw \
-    sspm \
     system \
     system_ext \
-    tee \
-    tkv \
-    vbmeta \
     vbmeta_system \
     vbmeta_vendor \
     vendor \
-    vendor_boot
+    vendor_boot \
+    vendor_dlkm
 
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
