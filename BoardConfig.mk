@@ -127,7 +127,7 @@ TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 # Recovery
 TARGET_NO_RECOVERY := true
 TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
