@@ -6,9 +6,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_TANK3.mk
+    $(LOCAL_DIR)/twrp_TANK3.mk
 
 COMMON_LUNCH_CHOICES := \
-    omni_TANK3-user \
-    omni_TANK3-userdebug \
-    omni_TANK3-eng
+    twrp_TANK3-user \
+    twrp_TANK3-userdebug \
+    twrp_TANK3-eng

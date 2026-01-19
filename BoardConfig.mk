@@ -65,7 +65,7 @@ BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_PAGE_SIZE)
 BOARD_MKBOOTIMG_ARGS += --board ""
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
-BOARD_MKBOOTIMG_ARGS += --dtb_size $(BOARD_DTB_SIZE)
+#BOARD_MKBOOTIMG_ARGS += --dtb_size $(BOARD_DTB_SIZE)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --vendor_cmdline "$(BOARD_VENDOR_CMDLINE)"
 BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
@@ -102,8 +102,7 @@ BOARD_MAIN_PARTITION_LIST := \
     product \
     vendor_dlkm \
     system_ext \
-    vendor \
-    system_dlkm \
+    vendor 
 
 # File System
 BOARD_HAS_LARGE_FILESYSTEM := true
