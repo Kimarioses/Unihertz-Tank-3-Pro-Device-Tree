@@ -1,5 +1,5 @@
 cc_library_static {
-    name: "libinit_TECNO-CL8",
+    name: "libinit_TANK2",
     header_libs: [
         "libbase_headers",
     ],
@@ -9,6 +9,6 @@ cc_library_static {
     static_libs: [
         "libbase",
     ],
-    srcs: ["init_TECNO-CL8.cpp"],
+    srcs: ["init_TANK2.cpp"],
     recovery_available: true,
 }
