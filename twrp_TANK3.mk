@@ -1,22 +1,8 @@
-##
-# Copyright (C) 2023 The Android Open Source Project
-# Copyright (C) 2023 SebaUbuntu's TWRP device tree generator
+#
+# Copyright (C) 2022 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
-
-#Inherit emulated_storage properties
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
-
-# Inherit userspace reboot properties
-$(call inherit-product, $(SRC_TARGET_DIR)/product/userspace_reboot.mk)
-
-# Inherit some common Omni stuff.
-$(call inherit-product, vendor/twrp/config/common.mk)
 
 # Inherit from TANK3 device
 $(call inherit-product, device/oblue/TANK3/device.mk)
@@ -28,3 +14,9 @@ PRODUCT_MODEL := TANK 3
 PRODUCT_MANUFACTURER := A-gold
 
 PRODUCT_GMS_CLIENTID_BASE := android-agold
+
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRIVATE_BUILD_DESC="TANK3-user 12 SP1A.210812.016 V01.00.01 release-keys"
+
+FINGERPRINT=8849/TANK3_EEA/TANK3:12/SP1A.210812.016/root.20231110.135415:user/release-keys
