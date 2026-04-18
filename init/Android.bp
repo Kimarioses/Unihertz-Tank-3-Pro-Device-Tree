@@ -1,5 +1,5 @@
 cc_library_static {
-    name: "libinit_TANK2",
+    name: "libinit_TANK3",
     header_libs: [
         "libbase_headers",
     ],
@@ -9,6 +9,6 @@ cc_library_static {
     static_libs: [
         "libbase",
     ],
-    srcs: ["init_TANK2.cpp"],
+    srcs: ["init_TANK3.cpp"],
     recovery_available: true,
 }
