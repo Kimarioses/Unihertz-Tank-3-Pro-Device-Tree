@@ -24,7 +24,7 @@ void vendor_load_properties()
     string prop_partitions[] = {"", "vendor.", "odm."};
     for (const string &prop : prop_partitions)
     {
-        property_override(string("ro.product.") + prop + string("name"), "TANK3-OP");
+        property_override(string("ro.product.") + prop + string("name"), "TANK3");
         property_override(string("ro.product.") + prop + string("marketname"), "TANK3 Pro");
         property_override(string("ro.product.system.") + prop + string("device"), "TANK3 Pro");
     }
